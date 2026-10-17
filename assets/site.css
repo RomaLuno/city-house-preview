@@ -786,3 +786,4 @@ dl.req a{color:var(--sand-d);text-decoration:underline;text-underline-offset:3px
 @media (max-width:900px){.kit.one ul{columns:1}}
 .mk.lf{flex-direction:row-reverse;transform:translate(calc(-100% + 14px),-14px)}
 .wrap>h2+.kit{margin-top:40px}
+.leaflet-container .mk a{color:var(--ink)}.leaflet-container .mk a:hover{color:var(--sand-d)}
