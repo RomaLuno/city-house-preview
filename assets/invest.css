@@ -135,3 +135,21 @@ main:has(.iv){background:var(--iv-krem)}
   .iv-tab td.r{padding-left:12px}
   .iv-arr{display:none}
 }
+
+/* правки 18.10: крупные плашки первого экрана, план целиком, карточки посёлков как на /lokacii/ */
+.iv-chips{gap:14px;margin-top:44px}
+.iv-chips li{font-size:clamp(17px,1.5vw,22px);padding:14px 24px;letter-spacing:.03em;background:rgba(20,16,14,.35);border-color:rgba(248,246,243,.7);font-weight:400}
+.iv-imgs img[src*="plan"]{object-fit:contain;background:#f0ece6}
+.iv-lc{position:relative;font-family:var(--sans)}
+.iv-lc .lc-in{padding:20px 20px 22px;gap:8px}
+.iv-lc h3{font-family:var(--serif);font-size:clamp(20px,1.6vw,24px);text-transform:none;letter-spacing:0;font-weight:400;line-height:1.2}
+.iv-lc .lc-addr{font-size:13px}
+.iv-lc .lc-short{font-size:14px!important;line-height:1.45}
+.iv-lc .lc-row{font-size:14px}
+.iv-lc .lc-row b{font-size:22px}
+.iv-lc .lc-lots{font-size:14px}
+.iv-lc .lc-lots li{padding:2px 0;font-size:14px!important}
+.iv-lc .lc-more{font-size:15px}
+.iv-lc .lc-more::after{content:"";position:absolute;inset:0}
+.iv-lc:hover .lc-more{color:var(--ink)}
+.iv-lc .lc-row{flex-direction:column;align-items:flex-start;gap:4px}
