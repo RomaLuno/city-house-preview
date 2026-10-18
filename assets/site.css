@@ -747,6 +747,8 @@ dl.req a{color:var(--sand-d);text-decoration:underline;text-underline-offset:3px
 .rel h2{font-size:clamp(30px,3.6vw,46px);margin-bottom:36px}
 .rel-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .rel-g a{display:block}
+.rel-g.c2{grid-template-columns:repeat(2,1fr)}.rel-g.c4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.rel-g.c4{grid-template-columns:repeat(2,1fr)}}
 .rel-g img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);margin-bottom:16px;transition:opacity .25s}
 .rel-g a:hover img{opacity:.86}
 .rel-g b{font-family:var(--serif);font-weight:400;font-size:24px;display:block;margin-bottom:6px}
