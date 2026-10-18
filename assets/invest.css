@@ -1,0 +1,137 @@
+/* Страница /invest/: стиль инвест-шорт-листа (папка 44) — крем и песок, Jost light, цифры Cormorant, капс с разрядкой */
+@font-face{font-family:"Jost";src:url(fonts/jost-300-600-cyrillic.woff2) format("woff2");font-weight:300 600;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Jost";src:url(fonts/jost-300-600-latin.woff2) format("woff2");font-weight:300 600;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD,U+2192}
+@font-face{font-family:"Cormorant";src:url(fonts/cormorant-400-cyrillic.woff2) format("woff2");font-weight:400 500;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Cormorant";src:url(fonts/cormorant-400-latin.woff2) format("woff2");font-weight:400 500;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{--iv-krem:#F8F6F3;--iv-pesok:#EAE3D9;--iv-pesok-t:#DCD2C4;--iv-tekst:#392821;--iv-seryy:#85776C;--iv-akcent:#B99077;--iv-tyomn:#1F1B1A}
+main:has(.iv){background:var(--iv-krem)}
+.iv,.iv-hero{font-family:"Jost",var(--sans);font-weight:300;color:var(--iv-tekst);background:var(--iv-krem)}
+.iv{padding:clamp(72px,9vw,128px) 0}
+.iv-pesok{background:var(--iv-pesok)}
+.iv-wrap{max-width:1600px;margin:0 auto;padding:0 clamp(16px,5.5vw,88px)}
+.iv p,.iv li{font-size:clamp(17px,1.25vw,19px);line-height:1.55;font-weight:350}
+.iv p+p{margin-top:14px}
+.iv-kap{font-family:"Jost",var(--sans);text-transform:uppercase;letter-spacing:.04em;font-weight:300;line-height:1.12;font-size:clamp(30px,3.4vw,46px);margin-bottom:clamp(28px,3.5vw,48px);max-width:28ch}
+.iv h3{font-family:"Jost",var(--sans);font-size:clamp(17px,1.3vw,20px);font-weight:500;text-transform:uppercase;letter-spacing:.06em;line-height:1.3}
+.iv h3+p{margin-top:8px}
+.iv-rub,.iv-rub2{display:flex;align-items:center;gap:22px;font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:var(--iv-seryy);font-weight:400;margin-bottom:28px}
+.iv-rub::before{content:"";width:72px;height:1px;background:currentColor;flex:none}
+.iv-rub2{letter-spacing:.2em;font-size:13px;margin-bottom:16px}
+.iv-num{font-family:"Cormorant",serif;font-weight:400;line-height:1;letter-spacing:-.01em;display:block}
+.iv-note{font-size:16px!important;line-height:1.5;color:var(--iv-seryy);font-weight:400!important;margin-top:40px;max-width:1100px}
+.iv-note a{color:inherit;text-decoration:underline}
+.iv-lead{margin-top:28px;max-width:900px}
+.iv-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,96px);align-items:start}
+.iv-2s{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.iv-ph{width:100%;height:100%;max-height:640px;object-fit:cover;display:block}
+.iv picture{display:block}
+
+/* первый экран — обложка шорт-листа */
+.iv-hero{position:relative;min-height:min(92vh,960px);display:flex;align-items:flex-end;color:var(--iv-krem);overflow:hidden}
+.iv-hero picture,.iv-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.iv-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,14,.15) 20%,rgba(20,16,14,.8) 100%)}
+.iv-hero .iv-wrap{position:relative;z-index:1;width:100%;padding-bottom:clamp(48px,7vw,96px)}
+.iv-hero .iv-rub{color:rgba(248,246,243,.8)}
+.iv-hero h1.iv-kap{font-size:clamp(36px,5vw,72px);max-width:none;margin-bottom:24px}
+.iv-sub{font-size:clamp(18px,1.6vw,24px);letter-spacing:.06em;text-transform:uppercase;line-height:1.4;color:rgba(248,246,243,.9)}
+.iv-chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;padding:0}
+.iv-chips li{border:1px solid rgba(248,246,243,.5);padding:9px 16px;font-size:15px;letter-spacing:.04em}
+
+/* цифры в ряд */
+.iv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(40px,5vw,72px)}
+.iv-s3{grid-template-columns:repeat(3,1fr)}
+.iv-s2{grid-template-columns:repeat(2,1fr);margin-top:0}
+.iv-st{border-top:1px solid var(--iv-pesok-t);padding-top:22px}
+.iv-st .iv-num{font-size:clamp(38px,4vw,58px);margin-bottom:10px}
+.iv-st span{font-size:16px;color:var(--iv-seryy);line-height:1.4;display:block}
+.iv-s2 .iv-num{font-size:clamp(28px,2.6vw,40px)}
+
+/* шаги */
+.iv-shagi{display:grid;grid-template-columns:repeat(5,1fr);gap:36px;position:relative}
+.iv-shagi::before{content:"";position:absolute;top:24px;left:24px;right:24px;height:1px;background:var(--iv-pesok-t)}
+.iv-krug{width:48px;height:48px;border-radius:50%;border:1px solid var(--iv-akcent);background:var(--iv-pesok);display:flex;align-items:center;justify-content:center;position:relative;font-family:"Cormorant",serif;font-size:24px;color:var(--iv-akcent);margin-bottom:30px}
+.iv-shag p{font-size:16.5px!important;color:#5c4c43}
+.iv-flow{display:flex;align-items:center;gap:clamp(16px,3vw,48px);margin-top:clamp(48px,6vw,80px);padding-top:32px;border-top:1px solid var(--iv-pesok-t);flex-wrap:wrap}
+.iv-flow .iv-num{font-size:clamp(32px,3vw,46px)}
+.iv-flow span{font-size:15px;color:var(--iv-seryy)}
+.iv-arr{font-size:28px!important;color:var(--iv-akcent)!important}
+
+/* карточки */
+.iv-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,3vw,44px)}
+.iv-c2{grid-template-columns:repeat(2,1fr)}
+.iv-c1{grid-template-columns:1fr}
+.iv-card{border-top:1px solid var(--iv-pesok-t);padding-top:22px}
+.iv-card p{color:#5c4c43}
+.iv-quote{margin-top:40px;padding:28px 32px;background:var(--iv-pesok);font-size:clamp(17px,1.35vw,20px)!important}
+.iv-pesok .iv-quote{background:var(--iv-krem)}
+
+/* таблица экономики */
+.iv-tab{border-collapse:collapse;width:100%}
+.iv-tab td{text-align:left;padding:16px 0;border-bottom:1px solid var(--iv-pesok-t);font-size:clamp(16px,1.2vw,18px);font-weight:300;vertical-align:top}
+.iv-tab td.r{text-align:right;white-space:nowrap;padding-left:24px}
+.iv-vy td{font-weight:500}
+.iv-big{background:var(--iv-krem);padding:clamp(28px,3vw,48px)}
+.iv-xl{font-size:clamp(56px,6vw,96px)!important;margin:6px 0 10px}
+.iv-big .iv-stats{margin-top:32px}
+.iv-big .iv-st .iv-num{font-size:clamp(30px,2.6vw,42px)}
+
+/* шкала срока */
+.iv-bar{display:grid;grid-template-columns:minmax(120px,170px) 1fr 110px;align-items:center;gap:24px;padding:18px 0;border-bottom:1px solid var(--iv-pesok-t)}
+.iv-bar b{font-weight:500;display:block}
+.iv-bar span{font-size:14px;color:var(--iv-seryy);display:block;margin-top:4px}
+.iv-dor{height:14px;background:var(--iv-pesok);position:relative}
+.iv-dor i{position:absolute;top:0;bottom:0;left:0;background:var(--iv-pesok-t)}
+.iv-bar.plan .iv-dor i{background:var(--iv-akcent)}
+.iv-bar .iv-num{font-size:38px;text-align:right}
+
+/* фото рядом */
+.iv-imgs{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-top:clamp(40px,5vw,72px)}
+.iv-imgs img{width:100%;height:clamp(220px,24vw,380px);object-fit:cover;display:block}
+
+/* лоты */
+.iv-lots{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,28px)}
+.iv-lot img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;margin-bottom:18px}
+.iv-lot .iv-num{font-size:clamp(28px,2.4vw,36px);margin-bottom:8px}
+.iv-lot p{margin:0}
+.iv-lot span{font-size:15px;color:var(--iv-seryy)}
+
+/* трек */
+.iv-line{margin-top:32px;font-size:15px!important;color:var(--iv-seryy);letter-spacing:.02em}
+
+/* сравнение */
+.iv-cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.iv-cmp-i{background:var(--iv-krem);padding:clamp(28px,3vw,44px)}
+.iv-cmp-i .iv-num{font-size:clamp(56px,6vw,88px);margin:18px 0 14px}
+.iv-cmp-i p{font-size:16px!important;color:var(--iv-seryy)}
+.iv-cmp-i.hl{background:var(--iv-tyomn);color:var(--iv-krem)}
+.iv-cmp-i.hl p{color:rgba(248,246,243,.75)}
+
+/* команда */
+.iv-kont{margin:32px 0 24px;font-size:18px!important}
+.iv-kont a{color:var(--iv-tekst);border-bottom:1px solid var(--iv-akcent)}
+.iv-btn{display:inline-block;background:var(--iv-tekst);color:var(--iv-krem);padding:17px 30px;text-transform:uppercase;letter-spacing:.12em;font-size:14px;font-weight:400}
+.iv-btn:hover{background:var(--iv-akcent)}
+
+/* форма */
+.iv-form{padding-top:0}
+.iv-form .form{border-radius:0}
+.iv-form .form h3,.iv-form .form p{font-family:"Jost",var(--sans)}
+.iv-form .form h3{text-transform:uppercase;letter-spacing:.04em;font-weight:300}
+.iv-form .btn{border-radius:0;text-transform:uppercase;letter-spacing:.1em;font-family:"Jost",var(--sans)}
+
+@media (max-width:1100px){
+  .iv-2,.iv-2s{grid-template-columns:1fr}
+  .iv-shagi{grid-template-columns:1fr 1fr;gap:28px}.iv-shagi::before{display:none}
+  .iv-cards,.iv-lots{grid-template-columns:1fr 1fr}
+  .iv-ph{max-height:440px}
+}
+@media (max-width:700px){
+  .iv-stats,.iv-s3{grid-template-columns:1fr 1fr}
+  .iv-shagi,.iv-cards,.iv-c2,.iv-lots,.iv-cmp{grid-template-columns:1fr}
+  .iv-imgs{grid-template-columns:1fr}
+  .iv-imgs img{height:240px}
+  .iv-bar{grid-template-columns:1fr 80px;gap:10px 16px}.iv-bar .iv-dor{grid-column:1/-1;order:3}.iv-bar .iv-num{font-size:30px}
+  .iv-tab td.r{padding-left:12px}
+  .iv-arr{display:none}
+}
