@@ -168,3 +168,7 @@ main:has(.iv){background:var(--iv-krem)}
 .iv-hero{min-height:min(80vh,820px)}
 .iv-imgs img[src*="plan"]{background:#fff}
 .iv-form{padding-top:0;padding-bottom:clamp(44px,5vw,80px)}
+/* план — в своих пропорциях, без белых полей (Роман, 18.10) */
+.iv-imgs{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) auto}
+.iv-imgs img[src*="plan"]{width:auto;max-width:none;object-fit:fill;aspect-ratio:470/680;background:none}
+@media (max-width:700px){.iv-imgs{grid-template-columns:1fr}.iv-imgs img[src*="plan"]{width:100%;height:auto}}
