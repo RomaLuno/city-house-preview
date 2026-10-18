@@ -649,7 +649,13 @@ nav a[aria-current]{color:var(--sand-d);opacity:1}
 
 /* дома локации */
 .lot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.lot-grid.n1{grid-template-columns:minmax(0,760px)}
+.lot-grid.n1{grid-template-columns:1fr}
+.lot-grid.n1 .lot{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.lot-grid.n1 .lot-img{aspect-ratio:auto;min-height:100%}
+.lot-grid.n1 .lot-in{padding:40px 44px;justify-content:center}
+.lot-utp{list-style:none;display:grid;gap:10px;font-size:16px;border-top:1px solid var(--line);padding-top:18px}
+.lot-utp li{padding-left:26px;position:relative}.lot-utp li:before{content:'';position:absolute;left:2px;top:.5em;width:12px;height:7px;border-left:2px solid var(--sand-d);border-bottom:2px solid var(--sand-d);transform:rotate(-45deg)}
+@media (max-width:900px){.lot-grid.n1 .lot{grid-template-columns:1fr}.lot-grid.n1 .lot-img{aspect-ratio:16/9}.lot-grid.n1 .lot-in{padding:24px 22px 28px}}
 .lot-grid.n2{grid-template-columns:repeat(2,1fr)}
 .lot{background:var(--paper);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .lot-img{position:relative;aspect-ratio:16/9;background:var(--green)}
