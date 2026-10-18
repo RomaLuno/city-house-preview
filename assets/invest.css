@@ -153,3 +153,18 @@ main:has(.iv){background:var(--iv-krem)}
 .iv-lc .lc-more::after{content:"";position:absolute;inset:0}
 .iv-lc:hover .lc-more{color:var(--ink)}
 .iv-lc .lc-row{flex-direction:column;align-items:flex-start;gap:4px}
+
+/* компактнее (Роман, 18.10): меньше воздуха между блоками */
+.iv{padding:clamp(44px,5vw,80px) 0}
+.iv-kap{margin-bottom:clamp(20px,2.4vw,32px)}
+.iv-rub{margin-bottom:16px}
+.iv-stats{margin-top:clamp(28px,3vw,44px)}
+.iv-flow{margin-top:clamp(28px,3vw,44px);padding-top:24px}
+.iv-imgs{margin-top:clamp(28px,3vw,44px)}
+.iv-note{margin-top:24px}
+.iv-quote{margin-top:24px;padding:20px 24px}
+.iv-lead{margin-top:18px}
+.iv-krug{margin-bottom:18px}
+.iv-hero{min-height:min(80vh,820px)}
+.iv-imgs img[src*="plan"]{background:#fff}
+.iv-form{padding-top:0;padding-bottom:clamp(44px,5vw,80px)}
