@@ -412,6 +412,10 @@ footer a:hover{color:#fff}
 .planx-r .plan-nav{position:absolute;right:20px;bottom:22px;z-index:3;color:#fff;font-size:17px}
 .planx-r .cap{padding-right:220px}
 .plan-nav span{min-width:44px;text-align:center}
+.planx-r .vars{position:absolute;top:20px;right:20px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:60%}
+.planx-r .vars button{width:60px;height:60px;padding:0;border:2px solid rgba(255,255,255,.55);border-radius:10px;background:#1b2a20 center/cover no-repeat;opacity:.75;transition:opacity .2s,border-color .2s,transform .2s}
+.planx-r .vars button:hover{opacity:1;transform:translateY(-2px)}
+.planx-r .vars button.on{opacity:1;border-color:var(--sand)}
 .plan-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle}
 
 /* карта кварталов */
@@ -428,6 +432,17 @@ footer a:hover{color:#fff}
 .pmap-svg .pt.now circle{fill:var(--green)}
 .pmap-svg .pt.dim{opacity:.22}
 .pmap-svg .pt.hi circle{r:20}
+.pmap-svg .pt .ring{fill:none;stroke:var(--green);stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center;animation:pring 2.4s ease-out infinite}
+.pmap-svg .pt.hi .ring{r:30}
+.pmap-svg .pt.live circle:not(.ring){fill:var(--green);stroke:var(--sand);stroke-width:7}
+.pmap-svg .pt.live text{fill:var(--green);text-decoration:underline;text-decoration-color:var(--sand);text-underline-offset:6px}
+.pmap-svg a.pt{cursor:pointer}
+.pmap-svg a.pt:hover circle:not(.ring),.pmap-svg a.pt:focus-visible circle:not(.ring){r:22;fill:var(--sand-d)}
+.pmap-svg a.pt:hover text{fill:var(--sand-d)}
+@keyframes pring{0%{opacity:.7;transform:scale(.5)}100%{opacity:0;transform:scale(1.3)}}
+@media (prefers-reduced-motion:reduce){.pmap-svg .pt .ring{animation:none;opacity:.5}}
+.pmap-live{margin-top:auto;padding:18px 14px 0;font-size:15px;opacity:.8;display:flex;gap:10px;align-items:center}
+.pmap-live i{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--sand);flex:none}
 .pmap-side{background:rgba(255,255,255,.06);padding:32px;display:flex;flex-direction:column;gap:6px}
 .pmap-side .eyebrow{color:var(--sand)}
 .pmap-side button{display:flex;gap:16px;align-items:baseline;text-align:left;padding:12px 14px;border-radius:var(--r);color:#fff;transition:background .2s}
@@ -577,7 +592,7 @@ a{text-underline-offset:3px}
   .rv{opacity:1;transform:none}
   .draw{stroke-dashoffset:0}
 }
-@media (max-width:760px){.planx-r .cap{padding:60px 20px 88px}.planx-r .plan-nav{left:20px;right:auto;bottom:20px}.planx-r .floors{top:14px;left:14px}}
+@media (max-width:760px){.planx-r .cap{padding:60px 20px 88px}.planx-r .plan-nav{left:20px;right:auto;bottom:20px}.planx-r .floors{top:14px;left:14px}.planx-r{min-height:480px}.planx-r .vars{top:auto;bottom:84px;left:20px;right:auto;justify-content:flex-start;max-width:none}.planx-r .vars button{width:48px;height:48px}.planx-r .cap{padding-bottom:148px}}
 
 /* ==== ХАБ И ЖУРНАЛ (новое к прототипу) ==== */
 picture{display:contents}
@@ -626,7 +641,7 @@ nav a[aria-current]{color:var(--sand-d);opacity:1}
 
 /* карточки локаций */
 .lc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.lc{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.lc{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
 .tint .lc{border-color:transparent}
 .lc-img{position:relative;aspect-ratio:16/9;background:var(--green);overflow:hidden}
 .lc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -641,11 +656,9 @@ nav a[aria-current]{color:var(--sand-d);opacity:1}
 .lc-short{color:var(--muted);font-size:17px}
 .lc-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid var(--line);padding-top:14px;margin-top:4px}
 .lc-row b{font-family:var(--serif);font-weight:400;font-size:28px;color:var(--green);white-space:nowrap}
-.lc-lots{list-style:none;font-size:16px;color:var(--muted)}
-.lc-lots li{padding:4px 0}
-.lc-lots b{color:var(--ink);font-weight:600}
 .lc-more{margin-top:auto;padding-top:8px;color:var(--sand-d);font-weight:600;text-decoration:underline;text-underline-offset:4px}
-.lc-more:hover{color:var(--ink)}
+.lc-more::after{content:"";position:absolute;inset:0}
+.lc:hover .lc-more{color:var(--ink)}
 
 /* дома локации */
 .lot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}

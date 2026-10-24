@@ -147,10 +147,7 @@ main:has(.iv){background:var(--iv-krem)}
 .iv-lc .lc-short{font-size:14px!important;line-height:1.45}
 .iv-lc .lc-row{font-size:14px}
 .iv-lc .lc-row b{font-size:22px}
-.iv-lc .lc-lots{font-size:14px}
-.iv-lc .lc-lots li{padding:2px 0;font-size:14px!important}
 .iv-lc .lc-more{font-size:15px}
-.iv-lc .lc-more::after{content:"";position:absolute;inset:0}
 .iv-lc:hover .lc-more{color:var(--ink)}
 .iv-lc .lc-row{flex-direction:column;align-items:flex-start;gap:4px}
 
@@ -172,3 +169,7 @@ main:has(.iv){background:var(--iv-krem)}
 .iv-imgs{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) auto}
 .iv-imgs img[src*="plan"]{width:auto;max-width:none;object-fit:fill;aspect-ratio:470/680;background:none}
 @media (max-width:700px){.iv-imgs{grid-template-columns:1fr}.iv-imgs img[src*="plan"]{width:100%;height:auto}}
+.iv-pmap{margin-top:clamp(32px,4vw,56px)}
+.iv-pmap .pmap{margin:0;border-radius:var(--r);overflow:hidden}
+.iv-pmap .pmap-side{background:var(--green);color:#fff;border-radius:0}
+.iv-pmap .pmap-side button{font-family:var(--sans)}

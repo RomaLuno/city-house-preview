@@ -123,12 +123,16 @@ function calc(){
       if(r[6])el.onclick=()=>selRoom(+el.dataset.i)});
     ORDER=F.rooms.map((r,i)=>[r,i]).filter(([r])=>r[6]).sort((a,b)=>(a[0][2]+a[0][4]/2)-(b[0][2]+b[0][4]/2)||a[0][3]-b[0][3]).map(([,i])=>i);
     $('planNav').style.visibility=ORDER.length?'':'hidden';
-    if(ORDER.length)selRoom(ORDER[atEnd?ORDER.length-1:0]);else if(P.viz)showViz(...P.viz);
+    if(ORDER.length)selRoom(ORDER[atEnd?ORDER.length-1:0]);else if(P.viz){$('vizVars').innerHTML='';showViz(...P.viz)}
     atEnd=false;
   }
   function selRoom(i){const F=PLANS[HOUSES[cur].plan].floors[floor],r=F.rooms[i];
     $$('#planSvg .rm').forEach(x=>x.classList.toggle('sel',+x.dataset.i===i));
-    $('rCount').textContent=(ORDER.indexOf(i)+1)+' / '+ORDER.length;showViz(r[6],r[0],(r[1]?r[1]+' · ':'')+'вариант интерьера')}
+    $('rCount').textContent=(ORDER.indexOf(i)+1)+' / '+ORDER.length;selVar(r,0)}
+  function selVar(r,k){const n=r[6].length,vv=$('vizVars');
+    vv.innerHTML=n>1?r[6].map((s,j)=>`<button type="button" data-k="${j}" class="${j===k?'on':''}" style="background-image:url(${s})" aria-label="Вариант ${j+1} из ${n}"></button>`).join(''):'';
+    $$('button',vv).forEach(b=>b.onclick=()=>selVar(r,+b.dataset.k));
+    showViz(r[6][k],r[0],(r[1]?r[1]+' · ':'')+(n>1?`вариант ${k+1} из ${n}`:'вариант интерьера'))}
   function stepRoom(d){const P=PLANS[HOUSES[cur].plan];if(!ORDER.length)return;
     const sel=document.querySelector('#planSvg .rm.sel'),k=ORDER.indexOf(sel?+sel.dataset.i:ORDER[0])+d;
     if(k>=0&&k<ORDER.length)return selRoom(ORDER[k]);
