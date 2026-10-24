@@ -413,6 +413,7 @@ footer a:hover{color:#fff}
 .planx-r .cap{padding-right:220px}
 .plan-nav span{min-width:44px;text-align:center}
 .planx-r .vars{position:absolute;top:20px;right:20px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:60%}
+.planx-r .vars span{flex-basis:100%;text-align:right;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6)}
 .planx-r .vars button{width:60px;height:60px;padding:0;border:2px solid rgba(255,255,255,.55);border-radius:10px;background:#1b2a20 center/cover no-repeat;opacity:.75;transition:opacity .2s,border-color .2s,transform .2s}
 .planx-r .vars button:hover{opacity:1;transform:translateY(-2px)}
 .planx-r .vars button.on{opacity:1;border-color:var(--sand)}
@@ -592,7 +593,7 @@ a{text-underline-offset:3px}
   .rv{opacity:1;transform:none}
   .draw{stroke-dashoffset:0}
 }
-@media (max-width:760px){.planx-r .cap{padding:60px 20px 88px}.planx-r .plan-nav{left:20px;right:auto;bottom:20px}.planx-r .floors{top:14px;left:14px}.planx-r{min-height:480px}.planx-r .vars{top:auto;bottom:84px;left:20px;right:auto;justify-content:flex-start;max-width:none}.planx-r .vars button{width:48px;height:48px}.planx-r .cap{padding-bottom:148px}}
+@media (max-width:760px){.planx-r .cap{padding:60px 20px 88px}.planx-r .plan-nav{left:20px;right:auto;bottom:20px}.planx-r .floors{top:14px;left:14px}.planx-r{min-height:480px}.planx-r .vars{top:auto;bottom:84px;left:20px;right:auto;justify-content:flex-start;max-width:none}.planx-r .vars button{width:48px;height:48px}.planx-r .vars span{text-align:left}.planx-r .cap{padding-bottom:172px}}
 
 /* ==== ХАБ И ЖУРНАЛ (новое к прототипу) ==== */
 picture{display:contents}

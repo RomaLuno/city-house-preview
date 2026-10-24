@@ -130,7 +130,7 @@ function calc(){
     $$('#planSvg .rm').forEach(x=>x.classList.toggle('sel',+x.dataset.i===i));
     $('rCount').textContent=(ORDER.indexOf(i)+1)+' / '+ORDER.length;selVar(r,0)}
   function selVar(r,k){const n=r[6].length,vv=$('vizVars');
-    vv.innerHTML=n>1?r[6].map((s,j)=>`<button type="button" data-k="${j}" class="${j===k?'on':''}" style="background-image:url(${s})" aria-label="Вариант ${j+1} из ${n}"></button>`).join(''):'';
+    vv.innerHTML=n>1?'<span>Варианты интерьера</span>'+r[6].map((s,j)=>`<button type="button" data-k="${j}" class="${j===k?'on':''}" style="background-image:url(${s})" aria-label="Вариант ${j+1} из ${n}"></button>`).join(''):'';
     $$('button',vv).forEach(b=>b.onclick=()=>selVar(r,+b.dataset.k));
     showViz(r[6][k],r[0],(r[1]?r[1]+' · ':'')+(n>1?`вариант ${k+1} из ${n}`:'вариант интерьера'))}
   function stepRoom(d){const P=PLANS[HOUSES[cur].plan];if(!ORDER.length)return;
