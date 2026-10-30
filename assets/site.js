@@ -43,7 +43,7 @@ function calc(){
   $('kDpL').textContent=dp+'%';$('kRateL').textContent=String(rate).replace('.',',')+'%';
   $('kTermL').textContent=term+(term%10===1&&term!==11?' год':(term%10>=2&&term%10<=4&&(term<12||term>14)?' года':' лет'));
   const down=K.price*dp/100;let loan=K.price-down,own=0;
-  if(K.prog==='fam'&&loan>K.cfg.fam_limit){own=loan-K.cfg.fam_limit;loan=K.cfg.fam_limit}
+  const lim=K.lim||K.cfg.fam_limit;if(K.prog==='fam'&&loan>lim){own=loan-lim;loan=lim}
   const r=rate/1200,n=term*12,pay=r?loan*r/(1-Math.pow(1+r,-n)):loan/n;
   $('kPay').textContent=rub(Math.round(pay/100)*100);$('kLoan').textContent=rub(Math.round(loan));$('kDown').textContent=rub(Math.round(down));
   $('kOwnRow').style.display=own?'flex':'none';$('kOwn').textContent=rub(Math.round(own));$('kCash').textContent=rub(Math.round(down+own));
@@ -51,11 +51,12 @@ function calc(){
 (function(){
   const box=document.querySelector('[data-calc]');if(!box)return;
   K.cfg=JSON.parse(box.dataset.calc);K.price=K.cfg.default;
+  if(K.cfg.fam_limits){K.lim=+K.cfg.fam_limits[0][1];$$('#kKids button').forEach(b=>b.onclick=()=>{$$('#kKids button').forEach(x=>x.classList.toggle('on',x===b));K.lim=+b.dataset.v;calc()})}
   $$('#kHouse button').forEach(b=>b.onclick=()=>{$$('#kHouse button').forEach(x=>x.classList.toggle('on',x===b));K.price=+b.dataset.v;calc()});
   $$('#kProg button').forEach(b=>b.onclick=()=>{
     $$('#kProg button').forEach(x=>x.classList.toggle('on',x===b));K.prog=b.dataset.v;
     $('kRate').value=K.prog==='fam'?K.cfg.fam_rate:K.cfg.std_rate;
-    $('kNote').textContent=K.prog==='fam'?K.cfg.note_fam:K.cfg.note_std;calc();
+    $('kNote').textContent=K.prog==='fam'?K.cfg.note_fam:K.cfg.note_std;if($('kKidsF'))$('kKidsF').style.display=K.prog==='fam'?'':'none';calc();
   });
   ['kDp','kRate','kTerm'].forEach(id=>$(id).oninput=calc);
   calc();
@@ -121,7 +122,7 @@ function calc(){
       el.onmousemove=e=>{const b=bx.getBoundingClientRect();tip.style.left=(e.clientX-b.left)+'px';tip.style.top=(e.clientY-b.top)+'px'};
       el.onmouseleave=()=>tip.classList.remove('show');
       if(r[6])el.onclick=()=>selRoom(+el.dataset.i)});
-    ORDER=F.rooms.map((r,i)=>[r,i]).filter(([r])=>r[6]).sort((a,b)=>(a[0][2]+a[0][4]/2)-(b[0][2]+b[0][4]/2)||a[0][3]-b[0][3]).map(([,i])=>i);
+    ORDER=F.order?F.order.filter(i=>F.rooms[i]&&F.rooms[i][6]):F.rooms.map((r,i)=>[r,i]).filter(([r])=>r[6]).sort((a,b)=>(a[0][2]+a[0][4]/2)-(b[0][2]+b[0][4]/2)||a[0][3]-b[0][3]).map(([,i])=>i);
     $('planNav').style.visibility=ORDER.length?'':'hidden';
     if(ORDER.length)selRoom(ORDER[atEnd?ORDER.length-1:0]);else if(P.viz){$('vizVars').innerHTML='';showViz(...P.viz)}
     atEnd=false;
@@ -168,7 +169,7 @@ function calc(){
 (function(){
   const maps=$$('[data-lmap]');if(!maps.length)return;
   const IC={home:'<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/>',park:'<path d="M12 3c-3.3 0-6 2.6-6 5.8 0 1 .3 2 .8 2.8A4.3 4.3 0 0 0 9 19.3h2V22h2v-2.7h2a4.3 4.3 0 0 0 2.2-7.7c.5-.8.8-1.8.8-2.8C18 5.6 15.3 3 12 3z"/>',metro:'<path d="M3 18h18v-1.6h-1.5L15.4 5 12 11.6 8.6 5 4.5 16.4H3zm6-8.3 3 5.4 3-5.4 2.3 6.7H6.7z"/>',city:'<path d="M5 21V8l5-3v16zm6 0V3l6 3v15zm7 0v-9l3 1.5V21z"/>',
-    shop:'<path d="M3 6h18l-2 9H6zM6 15l-1 4h14M8 21a1 1 0 1 0 0-.1M17 21a1 1 0 1 0 0-.1"/>',school:'<path d="M12 4 1 9l11 5 9-4.1V16h2V9zM5 13v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4l-7 3.2z"/>',pharm:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>'};
+    shop:'<path d="M3 6h18l-2 9H6zM6 15l-1 4h14M8 21a1 1 0 1 0 0-.1M17 21a1 1 0 1 0 0-.1"/>',school:'<path d="M12 4 1 9l11 5 9-4.1V16h2V9zM5 13v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4l-7 3.2z"/>',pharm:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>',train:'<path d="M7 3h10a3 3 0 0 1 3 3v9a3 3 0 0 1-2.2 2.9L20 21h-2.4l-1.8-3H8.2l-1.8 3H4l2.2-3.1A3 3 0 0 1 4 15V6a3 3 0 0 1 3-3zm-1 3v5h12V6zm2 8.5a1.5 1.5 0 1 0 0 .1zm8 0a1.5 1.5 0 1 0 0 .1z"/>',box:'<path d="M12 2 3 6.5v11L12 22l9-4.5v-11zm0 2.2 6.3 3.1L12 10.5 5.7 7.3zM5 9l6 3v7.5l-6-3zm8 10.5V12l6-3v7.5z"/>',sport:'<path d="M2 10h2V7h3v4h10V7h3v3h2v4h-2v3h-3v-4H7v4H4v-3H2z"/>'};
   let loading=null;
   const load=()=>loading||(loading=new Promise((ok,no)=>{
     const css=document.createElement('link');css.rel='stylesheet';css.href=SITE.base+'assets/vendor/leaflet/leaflet.css';document.head.appendChild(css);
@@ -176,20 +177,21 @@ function calc(){
   function init(el){
     const D=readJSON(el.parentNode.querySelector('[data-lmap-data]'));if(!D||!window.L)return;
     const near=D.near||[],P={};D.points.forEach(p=>P[p.k]=p);
-    const m=L.map(el,{scrollWheelZoom:false}).setView([D.points[0].lat,D.points[0].lon],D.zoom||13);
+    const m=L.map(el,{scrollWheelZoom:false}).setView(D.center||[D.points[0].lat,D.points[0].lon],D.zoom||13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(m);
     D.points.forEach(p=>{const nm=p.href?`<a href="${p.href}">${p.name}</a>`:p.name;
       L.marker([p.lat,p.lon],{icon:L.divIcon({className:'',html:`<div class="mk ${p.icon}${near.includes(p.k)?' near '+(p.pos||'up'):(p.pos?' '+p.pos:'')}"><i><svg viewBox="0 0 24 24" width="16" height="16" fill="#fff">${IC[p.icon]||IC.home}</svg></i><b>${nm}<small>${p.sub||''}</small></b></div>`,iconSize:[0,0]})}).addTo(m)});
     if(D.line)L.polyline(D.line,{color:'#806a4a',weight:3,dashArray:'6 8'}).addTo(m);
     m.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
     m.on('click',()=>m.scrollWheelZoom.enable());
-    const far=()=>el.classList.toggle('far',m.getZoom()<16);far();m.on('zoomend',far);
+    const far=()=>el.classList.toggle('far',m.getZoom()<(D.far||16));far();m.on('zoomend',far);
     const all=L.latLngBounds(D.points.map(p=>[p.lat,p.lon]));
     if(D.fit)m.fitBounds(all,{paddingTopLeft:[60,60],paddingBottomRight:[60,110]});
     $$('.map-pins button',el.parentNode).forEach(b=>b.onclick=()=>{
       $$('.map-pins button',el.parentNode).forEach(x=>x.classList.toggle('on',x===b));const k=b.dataset.p;
       if(k==='all')m.flyToBounds(all,{paddingTopLeft:[60,60],paddingBottomRight:[60,150]});
-      else if(k==='near')m.flyToBounds(L.latLngBounds(near.map(n=>[P[n].lat,P[n].lon])),{paddingTopLeft:[80,90],paddingBottomRight:[240,170],maxZoom:16});
+      else if(k==='near'){const nb=L.latLngBounds(near.map(n=>[P[n].lat,P[n].lon]));D.far?m.flyTo(nb.getCenter(),D.far):m.flyToBounds(nb,{paddingTopLeft:[80,90],paddingBottomRight:[240,170],maxZoom:16})}
+      else if(D.center&&k===D.points[0].k)m.flyTo(D.center,D.zoom);
       else m.flyTo([P[k].lat,P[k].lon],k==='city'?14:(D.fit?13:15))});
   }
   const go=el=>load().then(()=>init(el)).catch(()=>{});
@@ -199,6 +201,11 @@ function calc(){
 })();
 
 /* ==== карта кварталов: подсветка по году ==== */
+$$('.timeline button.tl').forEach(b=>b.onclick=()=>{
+  $$('#pmapSide button').forEach(x=>x.classList.remove('on'));
+  $$('.pmap-svg .pt').forEach(p=>{const hit=p.dataset.n===b.dataset.n;p.classList.toggle('hi',hit);p.classList.toggle('dim',!hit)});
+  const m=document.querySelector('.pmap-svg');if(m)m.scrollIntoView({behavior:'smooth',block:'center'});
+});
 $$('#pmapSide button').forEach(b=>b.onclick=()=>{
   const was=b.classList.contains('on');$$('#pmapSide button').forEach(x=>x.classList.remove('on'));
   $$('.pmap-svg .pt').forEach(p=>p.classList.remove('dim','hi'));if(was)return;b.classList.add('on');
@@ -238,3 +245,39 @@ $$('.form form').forEach(f=>{
   };
 });
 })();
+
+/* дома локации: выбор дома, карточка и план по этажам; план показывается целиком */
+(function(){
+  document.querySelectorAll('[data-lplan]').forEach(function(root){
+    var D=JSON.parse(root.querySelector('[data-lplan-data]').textContent),q=function(s){return root.querySelector(s)};
+    var img=q('[data-lp-img]'),none=q('[data-lp-none]'),fl=q('[data-lp-floors]'),h=0;
+    function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+    function floor(i){
+      var H=D.houses[h],F=H.floors[i];
+      img.src=F.img;img.alt=F.alt||'Пример планировки';img.parentNode.style.background=F.bg||'';
+      q('[data-lp-name]').textContent=H.t+', '+F.t;q('[data-lp-d]').textContent=F.d||'';
+      fl.querySelectorAll('button').forEach(function(b,k){b.classList.toggle('on',k===i)});
+    }
+    function house(i){
+      h=i;var H=D.houses[i],has=H.floors.length>0;
+      var v=q('[data-lp-viz]');v.src=H.img;v.alt=H.alt;
+      q('[data-lp-t]').textContent=H.t;q('[data-lp-price]').textContent=H.price;
+      q('[data-lp-specs]').innerHTML=H.specs.map(function(s){return '<div><span>'+esc(s[0])+'</span>'+esc(s[1])+'</div>'}).join('');
+      var u=q('[data-lp-utp]');u.innerHTML=H.utp.map(function(x){return '<li>'+esc(x)+'</li>'}).join('');u.hidden=!H.utp.length;
+      fl.innerHTML=H.floors.map(function(F){return '<button type="button">'+esc(F.t)+'</button>'}).join('');
+      fl.querySelectorAll('button').forEach(function(b,k){b.onclick=function(){floor(k)}});
+      root.querySelectorAll('.lp-types button').forEach(function(b,k){b.classList.toggle('on',k===i)});
+      img.hidden=!has;none.hidden=has;if(!has)img.parentNode.style.background='';fl.style.visibility=has?'':'hidden';
+      if(has)floor(0);else{q('[data-lp-name]').textContent=H.t+', '+H.sub;q('[data-lp-d]').textContent=''}
+    }
+    root.querySelectorAll('.lp-types button').forEach(function(b,k){b.onclick=function(){house(k)}});
+    house(0);
+  });
+})();
+
+/* цели на звонок и мессенджеры: вместе с формой дают составную цель «Обращение» для Директа */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="tel:"], a[href*="t.me/"], a[href*="wa.me/"]');
+  if(!a||!window.ym||!SITE.ym)return;
+  window.ym(+SITE.ym,'reachGoal',a.href.indexOf('tel:')===0?'call':a.href.indexOf('wa.me/')>-1?'whatsapp':'telegram');
+});

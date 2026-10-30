@@ -24,7 +24,7 @@ h2{font-size:clamp(36px,5vw,64px)}
 h3{font-size:clamp(24px,2.4vw,32px)}
 .eyebrow{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand-d);font-weight:600;margin-bottom:18px}
 .lead{font-size:clamp(18px,1.4vw,22px);color:var(--muted);max-width:620px}
-section{padding:120px 0}
+section{padding:80px 0}
 .btn{display:inline-flex;align-items:center;gap:14px;padding:18px 26px;border-radius:var(--r);font-weight:600;font-size:16px;transition:background .25s,color .25s,transform .25s}
 .btn::after{content:"+";font-weight:300;font-size:24px;line-height:0}
 .btn-sand{background:var(--sand-d);color:var(--white)}
@@ -123,10 +123,9 @@ nav a:hover{opacity:1;color:var(--sand-d)}
 .oak-facts{margin-top:40px;border-top:1px solid var(--line)}
 .oak-facts div{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
 .oak-facts b{font-family:var(--serif);font-weight:400;font-size:30px;color:var(--green);line-height:1.1}
-.oak-photos{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:end}
+.oak-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .oak-photos figure{position:relative}
 .oak-photos img{border-radius:var(--r);width:100%;aspect-ratio:3/4.4;object-fit:cover}
-.oak-photos figure:nth-child(2) img{aspect-ratio:3/4}
 .oak-photos figcaption{font-size:15px;color:var(--muted);margin-top:10px}
 
 /* конфигуратор */
@@ -204,8 +203,31 @@ nav a:hover{opacity:1;color:var(--sand-d)}
 .ax-bars .past i::after{transform:scaleX(1)}
 .ax-bars .on i::after{animation:axbar 6.5s linear forwards}
 @keyframes axbar{to{transform:scaleX(1)}}
+/* слайд Bonolit: стена в разрезе, слои разъезжаются при показе (build.py bonolit_svg) */
+.ax-tech{position:absolute;z-index:2;right:clamp(20px,8vw,140px);top:50%;width:min(380px,30vw);transform:translateY(-50%);padding:22px 24px 20px;border:1px solid rgba(255,255,255,.2);border-radius:var(--r);background:rgba(14,21,17,.58);backdrop-filter:blur(10px);opacity:0;transition:opacity .9s .5s}
+.ax-s.on .ax-tech{opacity:1}
+.ax-tk{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-bottom:6px}
+.ax-tech svg{display:block;width:100%;height:auto;overflow:visible}
+.ax-tech polygon,.ax-tech polyline{stroke-linejoin:round}
+.ax-tech .ly{transform:translate(var(--dx),var(--dy));transition:transform 1.4s .7s cubic-bezier(.2,.7,.2,1)}
+.ax-s.on .ax-tech .ly{transform:none}
+.ax-tech .gb.f{fill:#e4e0d8}.ax-tech .gb.t{fill:#f3f0ea}.ax-tech .gb.e{fill:#c9c4ba}
+.ax-tech .ut.f{fill:#cdb57d}.ax-tech .ut.t{fill:#e0cc98}.ax-tech .ut.e{fill:#b39b63}
+.ax-tech .fac.f{fill:#3b3532}.ax-tech .fac.t{fill:#58504b}.ax-tech .fac.e{fill:#2b2624}
+.ax-tech .f,.ax-tech .t,.ax-tech .e{stroke:rgba(255,255,255,.75);stroke-width:.8}
+.ax-tech .sm{fill:none;stroke:#aaa497;stroke-width:.7}
+.ax-tech .pore{fill:#b3ada2}
+.ax-tech .wl{fill:none;stroke:#a88f57;stroke-width:.8}
+.ax-tech .mt{fill:none;stroke:#7a706a;stroke-width:.7}
+.ax-tech .gd{fill:none;stroke:var(--sand);stroke-width:.8;stroke-dasharray:3 4;opacity:.8}
+.ax-tech .wm{fill:var(--green);stroke:var(--sand);stroke-width:1}
+.ax-tech .wmt{fill:#fff;font-family:var(--sans);font-size:15px;font-weight:600;text-anchor:middle}
+.ax-tech ol{list-style:none;margin:10px 0 0;padding:0;font-size:14px;line-height:1.35}
+.ax-tech li{display:flex;gap:10px;padding:7px 0;border-top:1px solid rgba(255,255,255,.14)}
+.ax-tech li b{flex:none;width:20px;height:20px;border:1px solid var(--sand);border-radius:50%;font-size:11px;line-height:18px;text-align:center;color:var(--sand)}
+@media(max-width:900px){.ax-tech{top:20px;right:16px;width:52vw;max-width:260px;transform:none;padding:12px 14px}.ax-tech ol{font-size:13px;margin-top:4px}.ax-tech li{gap:6px;padding:3px 0}.ax-tech li b{width:15px;height:15px;font-size:9px;line-height:13px}}
 @media(max-width:700px){.ax{height:78vh;min-height:480px}.ax-t{bottom:92px;right:20px}.ax-a{display:none}.ax-bars{bottom:36px;gap:8px}}
-@media(prefers-reduced-motion:reduce){.ax-s img,.ax-t h3,.ax-t p{transition:none}}
+@media(prefers-reduced-motion:reduce){.ax-s img,.ax-t h3,.ax-t p,.ax-tech,.ax-tech .ly{transition:none}}
 .slide img{width:100%;height:580px;object-fit:cover}
 .slide::after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,rgba(15,18,15,.78))}
 .slide div{position:absolute;left:28px;right:28px;bottom:26px;z-index:2}
@@ -225,6 +247,8 @@ nav a:hover{opacity:1;color:var(--sand-d)}
 
 /* надёжность */
 .rel-head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:56px}
+.kids-head{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end;margin-bottom:40px}.kids-ph{display:grid;grid-template-columns:1.35fr 1fr .75fr;gap:16px;align-items:start}.kids-ph img{border-radius:var(--r);width:100%;height:440px;object-fit:cover}.kids-ph figcaption{font-size:15px;color:var(--muted);margin-top:10px}
+@media (max-width:900px){.kids-head,.kids-ph{grid-template-columns:1fr;gap:16px}.kids-ph img{height:auto;aspect-ratio:4/3}}
 .oak-j{margin-top:20px;font-size:16px}.oak-j a{color:var(--sand-d);text-decoration:underline;text-underline-offset:4px}.oak-j a:hover{color:var(--ink)}
 .acc{border-top:1px solid var(--line)}
 .acc-i{border-bottom:1px solid var(--line);position:relative;overflow:hidden}
@@ -285,6 +309,12 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .doc svg{width:22px;height:26px;margin:16px 0;stroke:var(--ink);fill:none;stroke-width:1.4}
 .doc b{display:block;font-size:17px;margin-bottom:12px}
 .doc a{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--sand-d);font-weight:600}
+.doc-grid.list{grid-template-columns:1fr}
+.doc-grid.list .doc{display:grid;grid-template-columns:28px 22px 1fr auto;align-items:center;gap:20px;padding:28px 30px;border-right:0;border-bottom:1px solid var(--line)}
+.doc-grid.list .doc:last-child{border-bottom:0}
+.doc-grid.list .doc svg,.doc-grid.list .doc b{margin:0}
+@media (max-width:600px){.doc-grid.list .doc{grid-template-columns:28px 1fr;gap:6px 14px}.doc-grid.list .doc svg{display:none}.doc-grid.list .doc a{grid-column:2}}
+.oak-claim{font-family:var(--serif);font-size:clamp(30px,3.2vw,44px);line-height:1.12;color:var(--sand-d);margin-top:24px;max-width:560px}
 
 /* кварталы */
 .proj{background:var(--green);color:#fff}
@@ -298,6 +328,8 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .tl{background:rgba(255,255,255,.06);padding:24px 22px}
 .tl b{font-family:var(--serif);font-weight:400;font-size:24px;display:block;margin-bottom:6px}
 .tl span{font-size:16px;opacity:.75}
+a.tl,button.tl{display:block;color:inherit;font:inherit;text-align:left;border:0;cursor:pointer;transition:background .2s}
+a.tl:hover,button.tl:hover{background:rgba(255,255,255,.12)}
 .tl.now{background:var(--sand);color:var(--green)}
 .tl.now span{opacity:1}
 
@@ -367,7 +399,8 @@ footer a:hover{color:#fff}
 .mk b small{font-weight:400;color:var(--muted);margin-left:4px}
 .mk.near i{width:24px;height:24px;background:var(--green-2)}
 .lmap.far .mk.near b{display:none}
-.mk.near{position:relative}.mk.near b{position:absolute;left:-12px}.mk.up b{bottom:34px}.mk.dn b{top:34px}
+.mk.near{position:relative;margin-top:0;transform:translate(-12px,-12px)}.mk.near b{position:absolute;left:-12px}.mk.up b{bottom:34px}.mk.dn b{top:34px}
+.mk.lt b,.mk.rt b{top:50%;transform:translateY(-50%)}.mk.near.lt b{left:auto;right:34px}.mk.near.rt b{left:34px}
 .leaflet-container{font-family:var(--sans)}
 
 /* солнце */
@@ -452,7 +485,13 @@ footer a:hover{color:#fff}
 .pmap-side button:hover,.pmap-side button.on{background:rgba(255,255,255,.1)}
 .tl .btn{margin-top:14px;padding:12px 16px;font-size:16px}
 @media (max-width:1100px){.planx,.pmap{grid-template-columns:1fr}.planx-r{min-height:320px}}
-@media (max-width:760px){.sun-ctl{flex-wrap:wrap}.sun-ctl span{text-align:left}}
+@media (max-width:760px){.sun-ctl{flex-wrap:wrap;gap:4px 16px}.sun-ctl span{min-width:0;flex:1;text-align:right}.sun-ctl input{order:3;flex:1 1 100%}}
+/* ползунок солнца: крупная дорожка и бегунок под палец */
+.sun-ctl input{-webkit-appearance:none;appearance:none;height:44px;background:transparent;cursor:pointer}
+.sun-ctl input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:rgba(255,255,255,.28)}
+.sun-ctl input::-moz-range-track{height:6px;border-radius:3px;background:rgba(255,255,255,.28)}
+.sun-ctl input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border-radius:50%;background:var(--sand);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.sun-ctl input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--sand);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 
 
 /* поверхности браузера */
@@ -523,6 +562,7 @@ a{text-underline-offset:3px}
 .oak-small{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:16px;color:var(--muted)}
 #nature .aud{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 #nature .aud span{border:1px solid var(--line);border-radius:40px;padding:6px 14px;font-size:16px}
+#nature .aud span::before{content:"·";margin:0 10px;opacity:.6}
 @media (max-width:900px){.docf .form-in{grid-template-columns:1fr;gap:24px}.oak-main{flex-direction:column;gap:8px}}
 .mbar{display:none}
 .rv{}
@@ -544,8 +584,6 @@ a{text-underline-offset:3px}
     .hh-c{animation:pxHeroTxt linear both;animation-timeline:scroll(root);animation-range:0 90vh}
     .ax-s img{position:absolute;inset:-8% 0;height:116%;animation:pxImg linear both;animation-timeline:view();animation-range:cover}
     .form img{inset:-9% 0;height:118%;animation:pxImg linear both;animation-timeline:view();animation-range:cover}
-    .oak-photos figure:nth-child(1){animation:pxDn linear both;animation-timeline:view();animation-range:cover}
-    .oak-photos figure:nth-child(2){animation:pxUp linear both;animation-timeline:view();animation-range:cover}
   }
 }
 
@@ -557,12 +595,12 @@ a{text-underline-offset:3px}
   .kit>div+div{border-left:0;border-top:1px solid var(--line)}
   .steps{grid-template-columns:1fr 1fr}
   .steps-cap{display:none}
-  .timeline{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
   body{font-size:16px}
   .wrap{padding:0 16px}
-  section{padding:80px 0}
+  section{padding:56px 0}
   .hd{padding:0 16px;gap:12px;height:64px}
   .hero{padding-top:64px}
   .logo b{font-size:20px}
@@ -809,3 +847,55 @@ dl.req a{color:var(--sand-d);text-decoration:underline;text-underline-offset:3px
 .mk.lf{flex-direction:row-reverse;transform:translate(calc(-100% + 14px),-14px)}
 .wrap>h2+.kit{margin-top:40px}
 .leaflet-container .mk a{color:var(--ink)}.leaflet-container .mk a:hover{color:var(--sand-d)}
+
+/* дома локации в одном разделе: выбор дома, карточка, план; размеры не зависят от выбора */
+.lp-types{margin-bottom:16px}
+.lp-types button{border-color:var(--line);color:var(--ink);background:#fff;text-align:left}
+.lp-types button.on{background:var(--green);border-color:var(--green);color:#fff}
+.lp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.lp-card{background:var(--paper);border-radius:var(--r);overflow:hidden}
+.lp-card img{display:block;width:100%;height:auto}
+.lp-in{padding:24px 28px 28px;display:flex;flex-direction:column;gap:14px}
+.lp-in .btn{align-self:flex-start}
+.lp-plan{background:var(--paper);border-radius:var(--r);padding:24px 28px 28px;display:flex;flex-direction:column;gap:14px}
+.lp-head h3{color:var(--green);font-size:clamp(26px,2.2vw,34px)}
+.lp-head p{color:var(--muted);font-size:17px;margin-top:6px;min-height:3.2em}
+.lp-box{background:#fff;border-radius:var(--r);padding:8px;height:540px;display:flex;align-items:center;justify-content:center}
+.lp-box img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.lp-none{text-align:center;max-width:360px;display:flex;flex-direction:column;gap:16px;align-items:center;color:var(--muted);font-size:18px}
+.lp-note{color:var(--muted);font-size:15px}
+[data-lplan] [hidden]{display:none!important}
+@media (max-width:1000px){.lp-grid{grid-template-columns:1fr}.lp-box{height:420px}}
+
+/* карточки домов и локаций: картинка целиком в своих пропорциях, без обрезки и подложки */
+.lc-img,.lot-img,.lot-grid.n1 .lot-img{aspect-ratio:auto;min-height:0;background:none}
+.lc-img img,.lot-img img{position:static;display:block;width:100%;height:auto}
+.lot-grid.n1 .lot{align-items:start}
+
+/* телефон: карта без кнопок — ни зума, ни переключателей точек */
+@media (max-width:760px){.map-pins,.leaflet-control-zoom{display:none}}
+
+/* финал страницы во всю ширину (Прокшино): фото, заголовок слева, форма справа */
+section.fin{padding:0}
+.fin-box{border-radius:0;min-height:760px;align-items:center}
+.fin-box::before{background:linear-gradient(90deg,rgba(14,20,16,.82),rgba(14,20,16,.55) 55%,rgba(14,20,16,.7))}
+.fin .form-in{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;padding-top:96px;padding-bottom:96px}
+.fin .eyebrow{color:var(--sand);margin-bottom:22px;line-height:1.7}
+.fin h2{font-size:clamp(40px,4.6vw,76px);line-height:1.02;max-width:760px}
+.fin .lead{color:rgba(255,255,255,.85);margin-top:24px;max-width:560px}
+.fin-k{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;font-size:15px;letter-spacing:.08em;text-transform:uppercase}
+.fin-k a{border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px}
+.fin form{margin-top:0}
+@media (max-width:900px){.fin .form-in{grid-template-columns:1fr;gap:36px;padding-top:64px;padding-bottom:64px}.fin-box{min-height:0}}
+
+/* телефон: ничего не шире экрана, кнопки под палец (правки 26.10.2026) */
+@media (max-width:760px){
+  .hh h1{font-size:clamp(30px,9.4vw,48px)}
+  .tl{padding:18px 12px}.tl b{font-size:18px}.tl span{font-size:14px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step{min-height:0;padding:24px 16px}.step b{font-size:30px;white-space:nowrap}.step:first-child{grid-column:1/-1}.step:first-child b{font-size:46px}
+  .ft-grid{grid-template-columns:minmax(0,1fr)}
+  .ax-t h3{font-size:clamp(30px,10vw,44px)}
+  .tl .btn{padding:12px 12px;font-size:15px}
+  .plot-hint{position:static;padding:0 4px 12px;font-size:14px}
+  .doc a,.lc-more,.hh-link,.ft-nav a{display:inline-flex;align-items:center;min-height:44px}
+}
